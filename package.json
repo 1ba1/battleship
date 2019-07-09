@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/1ba1/battleship#readme",
   "devDependencies": {
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "css-loader": "^3.0.0",
     "jest": "^24.8.0",
     "style-loader": "^0.23.1",

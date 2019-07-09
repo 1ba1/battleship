@@ -34,3 +34,20 @@ test('board can receive attack on an empty cell', () => {
   const gameboard = gameboardFactory();
   expect(gameboard.receiveAttack(0, 0)).toEqual([0, 0]);
 });
+
+test('all ships are sunk', () => {
+  const gameboard = gameboardFactory();
+  gameboard.placeShip(1, true, [0, 0]);
+  gameboard.placeShip(1, true, [3, 7]);
+  gameboard.matrix[0][0].hit(0);
+  gameboard.matrix[3][7].hit(0);
+  expect(gameboard.allSunk()).toBe(true);
+});
+
+test('not all ships are sunk', () => {
+  const gameboard = gameboardFactory();
+  gameboard.placeShip(1, true, [0, 0]);
+  gameboard.placeShip(1, true, [3, 7]);
+  gameboard.matrix[0][0].hit(0);
+  expect(gameboard.allSunk()).toBe(false);
+});

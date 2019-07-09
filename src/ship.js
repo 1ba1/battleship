@@ -1,15 +1,15 @@
 const ShipFactory = (length) => {
-  const hits = [];
-  hits.length = length;
-  hits.fill(0);
+  const cells = [];
+  cells.length = length;
+  cells.fill(0);
   const isSunk = () => {
-    return hits.every(cell => cell === 1 );
+    return cells.every(cell => cell === 1 );
   };
   const hit = (cell) => {
-    hits[cell] = 1;
-    return hits;
+    cells[cell] = 1;
+    return cells;
   }
-  return { length, hits, isSunk, hit }
+  return { length, cells, isSunk, hit }
 };
 
 module.exports = ShipFactory;

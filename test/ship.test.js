@@ -3,7 +3,7 @@ const ShipFactory = require('../src/ship');
 test('ship can get hit', () => {
   const ship = ShipFactory(4);
   ship.hit(0);
-  expect(ship.cells).toEqual([1,0,0,0]);
+  expect(ship.cells[0]).toEqual('X');
 }); 
 
 test('ship is not sunk', () => {

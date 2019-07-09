@@ -16,18 +16,33 @@ const gameboardFactory = () => {
     const ship = ShipFactory(l);
     if (isHorizontal) {
       let row = coordinates[0];
-      for (let i = coordinates[1]; i < coordinates[1] + l; i++) {
+      for (let i = coordinates[1], count = 0; i < coordinates[1] + l; i++, count++) {
+        ship.cells[count] = [row, i];
         matrix[row][i] = ship;
       }
     } else {
       let col = coordinates[1];
-      for (let i = coordinates[0]; i < coordinates[0] + l; i++) {
+      for (let i = coordinates[0], count = 0; i < coordinates[0] + l; i++, count++) {
+        ship.cells[count] = [i, col];
         matrix[i][col] = ship;
       }
     }
     return matrix;
   };
-  return { matrix, placeShip };
+
+  const receiveAttack = (x, y) => {
+    if (matrix[x][y] === ' ') {
+      return [x, y];
+    } else {
+      const s = matrix[x][y];
+      const i = s.cells.indexOf([x, y]);
+      console.log(s);
+      console.log(i);
+      s.hit(i);
+    }
+  };
+
+  return { matrix, placeShip, receiveAttack };
 };
 
 module.exports = gameboardFactory;

@@ -35,10 +35,9 @@ const gameboardFactory = () => {
       return [x, y];
     } else {
       const s = matrix[x][y];
-      const i = s.cells.indexOf([x, y]);
-      console.log(s);
-      console.log(i);
+      const i = s.cells.findIndex(arr => (arr[0]===x && arr[1]===y));
       s.hit(i);
+      return true;
     }
   };
 

@@ -12,7 +12,6 @@ test('board can place ships', () => {
       }
     }
   }
-  console.log(gameboard.matrix);
 });
 
 test('board cannot place ships out of bounds', () => {
@@ -28,6 +27,10 @@ test('board cannot place ships out of bounds', () => {
 test('board can receive attack on a ship', () => {
   const gameboard = gameboardFactory();
   gameboard.placeShip(4, true, [0, 0]);
-  gameboard.receiveAttack(0, 0);
-  expect(gameboard.matrix[0][0].cells[0]).toEqual('X');
+  expect(gameboard.receiveAttack(0, 0)).toBe(true);
+});
+
+test('board can receive attack on an empty cell', () => {
+  const gameboard = gameboardFactory();
+  expect(gameboard.receiveAttack(0, 0)).toEqual([0, 0]);
 });

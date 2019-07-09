@@ -13,3 +13,5 @@ const ShipFactory = (length) => {
 };
 
 module.exports = ShipFactory;
+
+export { ShipFactory }

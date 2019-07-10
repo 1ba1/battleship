@@ -8,25 +8,50 @@ const gameboardFactory = () => {
     matrix[n] = new Array(10).fill(' ');
   }
 
-  const validHorizontalCoordinates = (x, y) => {
+  const validCoordinates = (l, isHorizontal, coordinates) => {
+    let row, col;
+
     if (
-      matrix[x][y] !== ' '
-      || (x < 9 && matrix[x + 1][y] !== ' ') 
-      || (y < 9 && matrix[x][y + 1] !== ' ')
-      ||
+      matrix[coordinates[0]][coordinates[1]] !== ' ' ||
+      (isHorizontal && coordinates[0] + l > 10) ||
+      (!isHorizontal && coordinates[1] + l > 10)
     )
-  };
+      return false;
 
-  const validVerticalCoordinates = (x, y) => {
+    if (isHorizontal) {
+      row = coordinates[0];
+      col = coordinates[1];
+    } else {
+      col = coordinates[0];
+      row = coordinates[1];
+    }
 
+    if (
+      (row + l === 9 && matrix[row - 1][col] !== ' ') || //check x-1
+      (row === 0 && matrix[row + l + 1][col]) //check x+l+1
+    )
+      return false;
+
+    //check y
+    for (let i = col; i < col + l; i++) {
+      if (
+        (row - 1 > 0 && matrix[row - 1][i] !== ' ') ||
+        (row + 1 < 10 && matrix[row + 1][i] !== ' ')
+      )
+        return false;
+    }
+
+    return true;
   };
 
   const placeShip = (l, isHorizontal, coordinates) => {
-    if (
-      (isHorizontal && coordinates[1] + l > 10) ||
-      (!isHorizontal && coordinates[0] + l > 10)
-    )
-      return -1;
+    // if (
+    //   (isHorizontal && coordinates[1] + l > 10) ||
+    //   (!isHorizontal && coordinates[0] + l > 10)
+    // )
+    //   return -1;
+    if (!validCoordinates(l, isHorizontal, coordinates)) return -1;
+
     const ship = shipFactory(l, isHorizontal);
     if (isHorizontal) {
       let row = coordinates[0];
@@ -35,7 +60,7 @@ const gameboardFactory = () => {
         i < coordinates[1] + l;
         i++, count++
       ) {
-        if (matrix[row][i] !== ' ') return -1;
+        //if (matrix[row][i] !== ' ') return -1;
         ship.cells[count] = [row, i];
         matrix[row][i] = ship;
       }
@@ -46,7 +71,7 @@ const gameboardFactory = () => {
         i < coordinates[0] + l;
         i++, count++
       ) {
-        if (matrix[i][col] !== ' ') return -1;
+        //if (matrix[i][col] !== ' ') return -1;
         ship.cells[count] = [i, col];
         matrix[i][col] = ship;
       }

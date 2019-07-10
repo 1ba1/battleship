@@ -1,4 +1,4 @@
-const gameboardFactory = require('../src/gameboard');
+const gameboardFactory = require('../src/gameboard').default;
 
 test('board can place ships', () => {
   const gameboard = gameboardFactory();

@@ -1,22 +1,35 @@
+#main {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 #playerBoard,
 #computerBoard {
   width: 500px;
+  height: 500px;
+  margin-bottom: 50px;
+  margin-right: 50px;
   display: grid;
-  grid-template-columns: 10%;
+  grid-template-columns: repeat(10, 1fr);
   box-sizing: border-box;
   border: 1px solid black;
 }
 
-.ship {
+#playerBoard > div,
+#computerBoard > div {
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+#playerBoard > .ship {
   background-color: blue;
   border-top: 2px solid green;
   border-bottom: 2px solid green;
 }
 
-.ship.first-cell {
+#playerBoard > .ship.first-cell {
   border-left: 2px solid green;
 }
 
-.ship.last-cell {
+#playerBoard > .ship.last-cell {
   border-right: 2px solid green;
 }

@@ -1,4 +1,4 @@
-import ShipFactory from './ship';
+import shipFactory from './ship';
 import { randomBoolean, randomCoordinates } from './utilities';
 
 const gameboardFactory = () => {
@@ -14,7 +14,7 @@ const gameboardFactory = () => {
       (!isHorizontal && coordinates[0] + l > 10)
     )
       return -1;
-    const ship = ShipFactory(l);
+    const ship = shipFactory(l);
     if (isHorizontal) {
       let row = coordinates[0];
       for (
@@ -38,7 +38,7 @@ const gameboardFactory = () => {
         matrix[i][col] = ship;
       }
     }
-    return matrix;
+    return ship;
   };
 
   const receiveAttack = (x, y) => {
@@ -119,5 +119,3 @@ const gameboardFactory = () => {
 };
 
 export default gameboardFactory;
-
-module.exports = gameboardFactory;

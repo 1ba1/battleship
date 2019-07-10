@@ -1,4 +1,4 @@
-const ShipFactory = (length) => {
+const shipFactory = (length) => {
   const cells = [];
   cells.length = length;
   cells.fill(0);
@@ -12,6 +12,4 @@ const ShipFactory = (length) => {
   return { length, cells, isSunk, hit }
 };
 
-export default ShipFactory;
-
-module.exports = ShipFactory;
+export default shipFactory;

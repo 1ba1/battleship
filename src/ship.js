@@ -12,6 +12,6 @@ const ShipFactory = (length) => {
   return { length, cells, isSunk, hit }
 };
 
-module.exports = ShipFactory;
+export default ShipFactory;
 
-export { ShipFactory }
+module.exports = ShipFactory;

@@ -1,0 +1,22 @@
+#playerBoard,
+#computerBoard {
+  width: 500px;
+  display: grid;
+  grid-template-columns: 10%;
+  box-sizing: border-box;
+  border: 1px solid black;
+}
+
+.ship {
+  background-color: blue;
+  border-top: 2px solid green;
+  border-bottom: 2px solid green;
+}
+
+.ship.first-cell {
+  border-left: 2px solid green;
+}
+
+.ship.last-cell {
+  border-right: 2px solid green;
+}

@@ -1,8 +1,5 @@
-import gameboardFactory from './gameboard';
-
-const player = (isHuman) => {
-  const gameboard = gameboardFactory();
-  gameboard.initializeBoard();
-
-  return { gameboard, isHuman }
+const playerFactory = (isHuman) => {
+  return { isHuman };
 };
+
+export { playerFactory };

@@ -1,4 +1,4 @@
-const shipFactory = (length) => {
+const shipFactory = (length, isHorizontal) => {
   const cells = [];
   cells.length = length;
   cells.fill(0);
@@ -9,7 +9,7 @@ const shipFactory = (length) => {
     cells[cell] = 'X';
     return cells;
   }
-  return { length, cells, isSunk, hit }
+  return { length, cells, isSunk, hit, isHorizontal }
 };
 
 export default shipFactory;

@@ -8,13 +8,26 @@ const gameboardFactory = () => {
     matrix[n] = new Array(10).fill(' ');
   }
 
+  const validHorizontalCoordinates = (x, y) => {
+    if (
+      matrix[x][y] !== ' '
+      || (x < 9 && matrix[x + 1][y] !== ' ') 
+      || (y < 9 && matrix[x][y + 1] !== ' ')
+      ||
+    )
+  };
+
+  const validVerticalCoordinates = (x, y) => {
+
+  };
+
   const placeShip = (l, isHorizontal, coordinates) => {
     if (
       (isHorizontal && coordinates[1] + l > 10) ||
       (!isHorizontal && coordinates[0] + l > 10)
     )
       return -1;
-    const ship = shipFactory(l);
+    const ship = shipFactory(l, isHorizontal);
     if (isHorizontal) {
       let row = coordinates[0];
       for (

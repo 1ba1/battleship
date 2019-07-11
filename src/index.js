@@ -3,6 +3,11 @@ import gameboardFactory from './gameboard';
 import DOMModule from './DOMModule';
 import './css/style.css';
 
+const updateCell = (e) => {
+  const row = e.target.getAttribute('data-index')[0];
+  const col = e.target.getAttribute('data-index')[1];
+};
+
 const play = () => {
   const playerBoard = gameboardFactory();
   const computerBoard = gameboardFactory();
@@ -16,3 +21,5 @@ const play = () => {
 };
 
 play();
+
+export { updateCell }

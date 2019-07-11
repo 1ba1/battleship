@@ -9,47 +9,44 @@ const gameboardFactory = () => {
   }
 
   const validCoordinates = (l, isHorizontal, coordinates) => {
-    let row, col;
-
     if (
       matrix[coordinates[0]][coordinates[1]] !== ' ' ||
-      (isHorizontal && coordinates[0] + l > 10) ||
-      (!isHorizontal && coordinates[1] + l > 10)
+      (isHorizontal && coordinates[1] + l > 10) ||
+      (!isHorizontal && coordinates[0] + l > 10)
     )
       return false;
+
+    const row = coordinates[0];
+    const col = coordinates[1];
+      
+    let rowStart = row - 1;
+    if (row === 0) rowStart = 0;
+    let colStart = col - 1;
+    if (col === 0) colStart = 0;
+
+    let rowEnd, colEnd;
 
     if (isHorizontal) {
-      row = coordinates[0];
-      col = coordinates[1];
+      rowEnd = row + 2;
+      if (row === 9) rowEnd = 10;
+      colEnd = col + l + 1;
+      if (col + l === 10) colEnd = 10;   
     } else {
-      col = coordinates[0];
-      row = coordinates[1];
+      rowEnd = row + l + 1;
+      if (row + l === 10) rowEnd = 10;
+      colEnd = col + 2;
+      if (col === 9) colEnd = 10;
     }
-
-    if (
-      (row + l === 9 && matrix[row - 1][col] !== ' ') || //check x-1
-      (row === 0 && matrix[row + l + 1][col]) //check x+l+1
-    )
-      return false;
-
-    //check y
-    for (let i = col; i < col + l; i++) {
-      if (
-        (row - 1 > 0 && matrix[row - 1][i] !== ' ') ||
-        (row + 1 < 10 && matrix[row + 1][i] !== ' ')
-      )
-        return false;
+    
+    for (let i = rowStart; i < rowEnd; i++) {
+      for (let j = colStart; j < colEnd; j++ ) {
+        if (matrix[i][j] !== ' ') return false;
+      }
     }
-
     return true;
   };
 
   const placeShip = (l, isHorizontal, coordinates) => {
-    // if (
-    //   (isHorizontal && coordinates[1] + l > 10) ||
-    //   (!isHorizontal && coordinates[0] + l > 10)
-    // )
-    //   return -1;
     if (!validCoordinates(l, isHorizontal, coordinates)) return -1;
 
     const ship = shipFactory(l, isHorizontal);
@@ -60,7 +57,6 @@ const gameboardFactory = () => {
         i < coordinates[1] + l;
         i++, count++
       ) {
-        //if (matrix[row][i] !== ' ') return -1;
         ship.cells[count] = [row, i];
         matrix[row][i] = ship;
       }
@@ -71,7 +67,6 @@ const gameboardFactory = () => {
         i < coordinates[0] + l;
         i++, count++
       ) {
-        //if (matrix[i][col] !== ' ') return -1;
         ship.cells[count] = [i, col];
         matrix[i][col] = ship;
       }
@@ -143,7 +138,6 @@ const gameboardFactory = () => {
         placedShips.push(ship);
       }
     }
-
     return placedShips;
   };
 

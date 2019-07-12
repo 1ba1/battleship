@@ -6,9 +6,10 @@ const DOMModule = (() => {
         if (matrix === null){
           div.setAttribute('data-index', `${i}${j}`);
           div.classList.add('computerBoard');
-        } else if (matrix[i][j] !== ' ' && matrix[i][j] !== 'M') {
+        } else {
           div.setAttribute('id', `${i}${j}`);
-          div.classList.add('ship');
+          div.classList.add('playerBoard');
+          if (matrix[i][j] !== ' ' && matrix[i][j] !== 'M') div.classList.add('ship');
         }
         parent.appendChild(div);
       }
@@ -30,7 +31,11 @@ const DOMModule = (() => {
     });
   };
 
-  return { displayBoard, displayShips }
+  const addClassToDiv = (div, className) => {
+    div.classList.add(className);
+  };
+
+  return { displayBoard, displayShips, addClassToDiv }
 })();
 
 export default DOMModule;

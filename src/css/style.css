@@ -51,10 +51,15 @@
   border-bottom: 2px solid green;
 }
 
+.hit,
+.miss {
+  pointer-events: none;
+}
+
 .hit {
   background-color: red;
 }
 
-.missed {
+.miss {
   background-color: lightblue;
 }

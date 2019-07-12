@@ -1,24 +1,19 @@
 import playerFactory from './player';
 import gameboardFactory from './gameboard';
 import DOMModule from './DOMModule';
+import randomCoordinates from './utilities';
 import './css/style.css';
-
-let callback;
-
-const makeMove = (e, board) => {
-  const row = e.target.getAttribute('data-index')[0];
-  const col = e.target.getAttribute('data-index')[1];
-  if (board.receiveAttack(row, col)) {
-    e.target.classList.add('hit');
-  } else {
-    e.target.classList.add('missed');
-  }
-  e.target.removeEventListener('click', callback);
-};
 
 const play = (player, computer) => {
   if (computer.active) {
-    // random move
+    const row = randomCoordinates()[0];
+    const col = randomCoordinates()[1];
+    const div = document.getElementById(`${row}${col}`);
+    const className = computer.attack(row, col, player);
+    DOMModule.addClassToDiv(div, className);
+  } else {
+    // wait for click ...?
+    console.log('human turn');
   }
 };
 
@@ -34,17 +29,34 @@ const startGame = () => {
   DOMModule.displayBoard(playerBoardDiv, playerBoard.matrix);
   DOMModule.displayBoard(computerBoardDiv, null);
   DOMModule.displayShips(playerShips);
+
   const divs = document.querySelectorAll('.computerBoard');
-  callback = (e) => { makeMove(e, computerBoard) };
+  const callback = (e) => {
+    if (!player.active) return;
+
+    const row = e.target.getAttribute('data-index')[0];
+    const col = e.target.getAttribute('data-index')[1];
+    console.log(e.target);
+    const className = player.attack(row, col, computer);
+    DOMModule.addClassToDiv(e.target, className);
+  };
   [...divs].forEach((div) => {
     div.addEventListener('click', callback, false);
-  })
+  });
 
-  while (!playerBoard.allSunk() || !computerBoard.allSunk()) {
-    play(player, computer);
+  // while (!player.board.allSunk() || !computer.board.allSunk()) {
+  // }
+  for(let i = 0; i<10; i++) {
+
+    if (!player.active) {
+      console.log("computer");
+      const row = randomCoordinates()[0];
+      const col = randomCoordinates()[1];
+      const div = document.getElementById(`${row}${col}`);
+      const className = computer.attack(row, col, player);
+      DOMModule.addClassToDiv(div, className);
+    } 
   }
 };
 
-
 startGame();
-//play();

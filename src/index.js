@@ -32,7 +32,6 @@ const startGame = () => {
 
   const divs = document.querySelectorAll('.computerBoard');
   const callback = (e) => {
-    if (!player.active) return;
 
     const row = e.target.getAttribute('data-index')[0];
     const col = e.target.getAttribute('data-index')[1];
@@ -48,7 +47,7 @@ const startGame = () => {
   // }
   for(let i = 0; i<10; i++) {
 
-    if (!player.active) {
+    if (computer.active) {
       console.log("computer");
       const row = randomCoordinates()[0];
       const col = randomCoordinates()[1];

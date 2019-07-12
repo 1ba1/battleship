@@ -1,5 +1,6 @@
-const playerFactory = (isHuman) => {
-  return { isHuman };
+const playerFactory = (isHuman, active, board) => {
+
+  return { isHuman, active, board };
 };
 
 export { playerFactory };

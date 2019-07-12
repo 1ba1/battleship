@@ -18,7 +18,7 @@ const gameboardFactory = () => {
 
     const row = coordinates[0];
     const col = coordinates[1];
-      
+
     let rowStart = row - 1;
     if (row === 0) rowStart = 0;
     let colStart = col - 1;
@@ -30,14 +30,14 @@ const gameboardFactory = () => {
       rowEnd = row + 2;
       if (row === 9) rowEnd = 10;
       colEnd = col + l + 1;
-      if (col + l === 10) colEnd = 10;   
+      if (col + l === 10) colEnd = 10;
     } else {
       rowEnd = row + l + 1;
       if (row + l === 10) rowEnd = 10;
       colEnd = col + 2;
       if (col === 9) colEnd = 10;
     }
-    
+
     for (let i = rowStart; i < rowEnd; i++) {
       for (let j = colStart; j < colEnd; j++ ) {
         if (matrix[i][j] !== ' ') return false;
@@ -77,7 +77,7 @@ const gameboardFactory = () => {
   const receiveAttack = (x, y) => {
     if (matrix[x][y] === ' ') {
       matrix[x][y] = 'M';
-      return [x, y];
+      return false;
     } else {
       const s = matrix[x][y];
       const i = s.cells.findIndex((arr) => arr[0] === x && arr[1] === y);

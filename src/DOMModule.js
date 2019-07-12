@@ -1,5 +1,3 @@
-import updateCell from './index'
-
 const DOMModule = (() => {
   const displayBoard = (parent, matrix) => {
     for (let i = 0; i < 10; i++) {
@@ -7,7 +5,7 @@ const DOMModule = (() => {
         const div = document.createElement('div');
         if (matrix === null){
           div.setAttribute('data-index', `${i}${j}`);
-          div.addEventListener('click', updateCell, false);
+          div.classList.add('computerBoard');
         } else if (matrix[i][j] !== ' ' && matrix[i][j] !== 'M') {
           div.setAttribute('id', `${i}${j}`);
           div.classList.add('ship');

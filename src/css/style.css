@@ -50,3 +50,11 @@
 #playerBoard > .ship.last-cell.vertical {
   border-bottom: 2px solid green;
 }
+
+.hit {
+  background-color: red;
+}
+
+.missed {
+  background-color: lightblue;
+}

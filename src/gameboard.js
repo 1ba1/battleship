@@ -39,7 +39,7 @@ const gameboardFactory = () => {
     }
 
     for (let i = rowStart; i < rowEnd; i++) {
-      for (let j = colStart; j < colEnd; j++ ) {
+      for (let j = colStart; j < colEnd; j++) {
         if (matrix[i][j] !== ' ') return false;
       }
     }

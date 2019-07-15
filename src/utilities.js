@@ -1,11 +1,11 @@
-const randomCoordinates = () => {
+export const randomCoordinates = () => {
   const x = Math.round(Math.random() * 9);
   const y = Math.round(Math.random() * 9);
   return [x, y];
 };
 
-const randomBoolean = () => {
-  return (Math.random() > 0.5) ? true : false;
+export const randomBoolean = () => {
+  return Math.random() > 0.5 ? true : false;
 };
 
-export { randomBoolean, randomCoordinates }
+export default randomCoordinates;

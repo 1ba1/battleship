@@ -1,7 +1,8 @@
 #main {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 #playerBoard,
@@ -9,45 +10,44 @@
   width: 500px;
   height: 500px;
   margin-bottom: 50px;
-  margin-right: 50px;
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   box-sizing: border-box;
   border: 1px solid black;
 }
 
-#playerBoard > div,
-#computerBoard > div {
+div.playerBoard,
+div.computerBoard {
   border: 1px solid rgba(0, 0, 0, 0.3);
 }
 
-#playerBoard > .ship {
+.playerBoard.ship {
   background-color: blue;
 }
 
-#playerBoard > .ship.horizontal {
+.playerBoard.ship.horizontal {
   border-top: 2px solid green;
   border-bottom: 2px solid green;
 }
 
-#playerBoard > .ship.vertical {
+.playerBoard.ship.vertical {
   border-right: 2px solid green;
   border-left: 2px solid green;
 }
 
-#playerBoard > .ship.first-cell.horizontal {
+.playerBoard.ship.first-cell.horizontal {
   border-left: 2px solid green;
 }
 
-#playerBoard > .ship.last-cell.horizontal {
+.playerBoard.ship.last-cell.horizontal {
   border-right: 2px solid green;
 }
 
-#playerBoard > .ship.first-cell.vertical {
+.playerBoard.ship.first-cell.vertical {
   border-top: 2px solid green;
 }
 
-#playerBoard > .ship.last-cell.vertical {
+.playerBoard.ship.last-cell.vertical {
   border-bottom: 2px solid green;
 }
 
@@ -62,4 +62,8 @@
 
 .miss {
   background-color: lightblue;
+}
+
+.playerBoard.hit {
+  background-color: brown;
 }

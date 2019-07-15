@@ -90,8 +90,7 @@ const gameboardFactory = () => {
     for (let i = 0; i < matrix.length; i++) {
       for (let j = 0; j < matrix.length; j++) {
         if (
-          matrix[i][j] !== ' ' &&
-          matrix[i][j] !== 'M' &&
+          typeof matrix[i][j] === 'object' &&
           !matrix[i][j].isSunk()
         )
           return false;

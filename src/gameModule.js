@@ -6,12 +6,11 @@ import './css/style.css';
 
 const gameModule = (() => {
   const checkForWin = (player, computer) => {
-    console.log(computer.board);
     if (player.board.allSunk() || computer.board.allSunk()) {
-      console.log('there is a winner');
+      // console.log('there is a winner');
       player.active = false;
       computer.active = false;
-      const divs = document.querySelectorAll('.computerBoard');
+      // const divs = document.querySelectorAll('.computerBoard');
 
       return true;
     } else {
@@ -50,7 +49,7 @@ const gameModule = (() => {
     attack(computer, player, row, col, div);
 
     if (checkForWin(player, computer)) {
-      // ...
+      console.log('computer wins')
     } else {
       // computer.active = false;
       // player.active = true;
@@ -58,9 +57,10 @@ const gameModule = (() => {
   };
 
   const startGame = () => {
-    const playerBoard = gameboardFactory();
+    const randomize = document.getElementById('randomize');
+    let playerBoard = gameboardFactory();
     const computerBoard = gameboardFactory();
-    const playerShips = playerBoard.initializeBoard();
+    let playerShips = playerBoard.initializeBoard();
     const computerShips = computerBoard.initializeBoard();
     const player = playerFactory(true, playerBoard, null);
     const computer = playerFactory(false, computerBoard, []);
@@ -69,14 +69,25 @@ const gameModule = (() => {
     DOMModule.displayBoard(playerBoardDiv, player.board.matrix);
     DOMModule.displayBoard(computerBoardDiv, null);
     DOMModule.displayShips(playerShips);
+
+    // const randomizePlacement = () => {
+    //   playerBoard = gameboardFactory();
+    //   playerShips = playerBoard.initializeBoard();
+    //   player.board = playerBoard;
+    //   DOMModule.displayBoard(playerBoardDiv, player.board.matrix);
+    //   DOMModule.displayShips(playerShips);
+    // };
+
+    randomize.addEventListener('click', randomizePlacement, false);
+
     const divs = document.querySelectorAll('.computerBoard');
 
     const callback = (e) => {
       const row = e.target.getAttribute('data-index')[0];
       const col = e.target.getAttribute('data-index')[1];
-      attack(player, computer, row, col, e.target);
+      attack(player, computer, +row, +col, e.target);
       if (checkForWin(player, computer)) {
-        // ...
+        console.log('player wins')
       } else {
         while (computer.active) {
           computerMove(player, computer);

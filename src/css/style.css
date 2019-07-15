@@ -6,19 +6,21 @@ h1 {
 #main {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
-  align-items: center;
+  justify-content: space-around;
+  align-items: flex-start;
+  align-content: flex-start;
 }
 
 #playerBoard,
 #computerBoard {
   width: 500px;
   height: 500px;
-  margin-bottom: 50px;
   display: grid;
+  margin-bottom: 50px;
   grid-template-columns: repeat(10, 1fr);
   box-sizing: border-box;
   border: 1px solid black;
+  position: relative;
 }
 
 div.playerBoard,
@@ -71,4 +73,16 @@ div.computerBoard {
 
 .playerBoard.hit {
   background-color: brown;
+}
+
+#message {
+  font-size: 30px;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+#play {
+  padding: 20px;
+  width: 200px;
+  position: absolute;
 }

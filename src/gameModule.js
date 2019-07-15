@@ -7,11 +7,14 @@ import './css/style.css';
 const gameModule = (() => {
   const checkForWin = (player, computer) => {
     if (player.board.allSunk() || computer.board.allSunk()) {
-      // console.log('there is a winner');
       player.active = false;
       computer.active = false;
-      // const divs = document.querySelectorAll('.computerBoard');
-
+      const message = document.getElementById('message');
+      if (computer.board.allSunk) {
+        message.textContent = 'Human Player Wins!';
+      } else {
+        message.textContent = 'Computer Wins!';
+      }
       return true;
     } else {
       return false;
@@ -21,7 +24,6 @@ const gameModule = (() => {
   const attack = (attacker, opponent, row, col, div) => {
     if (!attacker.active) return;
 
-    //console.log(`${row} ${col} `);
     const result = opponent.board.receiveAttack(row, col) ? 'hit' : 'miss';
     DOMModule.addClassToDiv(div, result);
     if (result === 'miss') {
@@ -34,6 +36,7 @@ const gameModule = (() => {
   const computerMove = (player, computer) => {
     let row, col;
     let validMove = false;
+
     while (!validMove) {
       const coordinates = randomCoordinates();
       row = coordinates[0];
@@ -43,62 +46,64 @@ const gameModule = (() => {
       );
       if (pastMovesIndex === -1) validMove = true;
     }
+
     computer.pastMoves.push([row, col]);
 
     const div = document.getElementById(`${row}${col}`);
+
     attack(computer, player, row, col, div);
 
-    if (checkForWin(player, computer)) {
-      console.log('computer wins')
-    } else {
-      // computer.active = false;
-      // player.active = true;
-    }
+    checkForWin(player, computer)
+  };
+
+  const cleanBoard = (query, id) => {
+    const children = document.querySelectorAll(query);
+    const parent = document.getElementById(id);
+
+    [...children].forEach((child) => {
+      parent.removeChild(child);
+    });
   };
 
   const startGame = () => {
-    const randomize = document.getElementById('randomize');
-    let playerBoard = gameboardFactory();
+    const playerBoardDiv = document.getElementById('playerBoard');
+    const computerBoardDiv = document.getElementById('computerBoard');
+    const playerBoard = gameboardFactory();
     const computerBoard = gameboardFactory();
-    let playerShips = playerBoard.initializeBoard();
+    const playerShips = playerBoard.initializeBoard();
     const computerShips = computerBoard.initializeBoard();
     const player = playerFactory(true, playerBoard, null);
     const computer = playerFactory(false, computerBoard, []);
-    const playerBoardDiv = document.getElementById('playerBoard');
-    const computerBoardDiv = document.getElementById('computerBoard');
     DOMModule.displayBoard(playerBoardDiv, player.board.matrix);
     DOMModule.displayBoard(computerBoardDiv, null);
     DOMModule.displayShips(playerShips);
 
-    // const randomizePlacement = () => {
-    //   playerBoard = gameboardFactory();
-    //   playerShips = playerBoard.initializeBoard();
-    //   player.board = playerBoard;
-    //   DOMModule.displayBoard(playerBoardDiv, player.board.matrix);
-    //   DOMModule.displayShips(playerShips);
-    // };
-
-    randomize.addEventListener('click', randomizePlacement, false);
-
-    const divs = document.querySelectorAll('.computerBoard');
+    const computerBoardDivs = document.querySelectorAll('.computerBoard');
 
     const callback = (e) => {
       const row = e.target.getAttribute('data-index')[0];
       const col = e.target.getAttribute('data-index')[1];
+
       attack(player, computer, +row, +col, e.target);
-      if (checkForWin(player, computer)) {
-        console.log('player wins')
-      } else {
+
+      if (!checkForWin(player, computer)) {
         while (computer.active) {
           computerMove(player, computer);
         }
-      }
+      } 
     };
 
-    [...divs].forEach((div) => {
+    [...computerBoardDivs].forEach((div) => {
       div.addEventListener('click', callback, false);
     });
   };
+
+  const randomize = document.getElementById('randomize');
+  randomize.addEventListener('click', () => {
+    cleanBoard('.playerBoard', 'playerBoard');
+    cleanBoard('.computerBoard', 'computerBoard');
+    startGame();
+  }, false);
 
   return { startGame }
 })();

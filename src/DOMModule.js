@@ -9,7 +9,9 @@ const DOMModule = (() => {
         } else {
           div.setAttribute('id', `${i}${j}`);
           div.classList.add('playerBoard');
-          if (matrix[i][j] !== ' ' && matrix[i][j] !== 'M') div.classList.add('ship');
+          if (matrix[i][j] !== ' ' && matrix[i][j] !== 'M') {
+            div.classList.add('ship');
+          }
         }
         parent.appendChild(div);
       }

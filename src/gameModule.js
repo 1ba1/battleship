@@ -53,7 +53,7 @@ const gameModule = (() => {
 
     attack(computer, player, row, col, div);
 
-    checkForWin(player, computer)
+    checkForWin(player, computer);
   };
 
   const startGame = () => {
@@ -79,7 +79,7 @@ const gameModule = (() => {
         while (computer.active) {
           computerMove(player, computer);
         }
-      } 
+      }
     };
 
     const computerBoardDivs = document.querySelectorAll('.computerBoard');
@@ -89,7 +89,7 @@ const gameModule = (() => {
     });
   };
 
-  return { startGame }
+  return { startGame };
 })();
 
 export default gameModule;

@@ -32,7 +32,7 @@ test('board can receive attack on a ship', () => {
 
 test('board can receive attack on an empty cell', () => {
   const gameboard = gameboardFactory();
-  expect(gameboard.receiveAttack(0, 0)).toEqual([0, 0]);
+  expect(gameboard.receiveAttack(0, 0)).toEqual(false);
 });
 
 test('all ships are sunk', () => {

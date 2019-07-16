@@ -9,12 +9,20 @@ const gameModule = (() => {
     if (player.board.allSunk() || computer.board.allSunk()) {
       player.active = false;
       computer.active = false;
-      const message = document.getElementById('message');
-      if (computer.board.allSunk) {
-        message.textContent = 'Human Player Wins!';
+      if (computer.board.allSunk()) {
+        DOMModule.displayMessage('Human Player Wins!');
       } else {
-        message.textContent = 'Computer Wins!';
+        DOMModule.displayMessage('Computer Wins!');
       }
+      const button = document.getElementById('restart');
+      button.classList.remove('hide');
+      button.addEventListener(
+        'click',
+        () => {
+          location.reload();
+        },
+        false
+      );
       return true;
     } else {
       return false;
@@ -61,6 +69,7 @@ const gameModule = (() => {
     const computerBoardDiv = document.getElementById('computerBoard');
     const playerBoard = gameboardFactory();
     const computerBoard = gameboardFactory();
+    console.log(computerBoard.matrix);
     const playerShips = playerBoard.initializeBoard();
     const computerShips = computerBoard.initializeBoard();
     const player = playerFactory(true, playerBoard, null);

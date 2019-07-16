@@ -46,7 +46,12 @@ const DOMModule = (() => {
     });
   };
 
-  return { displayBoard, displayShips, addClassToDiv, cleanBoard };
+  const displayMessage = (msg) => {
+    const message = document.getElementById('message');
+    message.textContent = msg;
+  }
+
+  return { displayBoard, displayShips, addClassToDiv, cleanBoard, displayMessage };
 })();
 
 export default DOMModule;

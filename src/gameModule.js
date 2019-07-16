@@ -56,15 +56,6 @@ const gameModule = (() => {
     checkForWin(player, computer)
   };
 
-  const cleanBoard = (query, id) => {
-    const children = document.querySelectorAll(query);
-    const parent = document.getElementById(id);
-
-    [...children].forEach((child) => {
-      parent.removeChild(child);
-    });
-  };
-
   const startGame = () => {
     const playerBoardDiv = document.getElementById('playerBoard');
     const computerBoardDiv = document.getElementById('computerBoard');
@@ -77,8 +68,6 @@ const gameModule = (() => {
     DOMModule.displayBoard(playerBoardDiv, player.board.matrix);
     DOMModule.displayBoard(computerBoardDiv, null);
     DOMModule.displayShips(playerShips);
-
-    const computerBoardDivs = document.querySelectorAll('.computerBoard');
 
     const callback = (e) => {
       const row = e.target.getAttribute('data-index')[0];
@@ -93,17 +82,12 @@ const gameModule = (() => {
       } 
     };
 
+    const computerBoardDivs = document.querySelectorAll('.computerBoard');
     [...computerBoardDivs].forEach((div) => {
       div.addEventListener('click', callback, false);
+      DOMModule.addClassToDiv(div, 'inactive');
     });
   };
-
-  const randomize = document.getElementById('randomize');
-  randomize.addEventListener('click', () => {
-    cleanBoard('.playerBoard', 'playerBoard');
-    cleanBoard('.computerBoard', 'computerBoard');
-    startGame();
-  }, false);
 
   return { startGame }
 })();

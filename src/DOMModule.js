@@ -37,7 +37,16 @@ const DOMModule = (() => {
     div.classList.add(className);
   };
 
-  return { displayBoard, displayShips, addClassToDiv }
+  const cleanBoard = (query, id) => {
+    const children = document.querySelectorAll(query);
+    const parent = document.getElementById(id);
+
+    [...children].forEach((child) => {
+      parent.removeChild(child);
+    });
+  };
+
+  return { displayBoard, displayShips, addClassToDiv, cleanBoard }
 })();
 
 export default DOMModule;

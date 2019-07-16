@@ -1,6 +1,7 @@
 h1 {
   text-align: center;
   font-size: 40px;
+  margin-top: 30px;
 }
 
 #main {
@@ -9,14 +10,21 @@ h1 {
   justify-content: space-around;
   align-items: flex-start;
   align-content: flex-start;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+#main > div {
+  position: relative;
+  text-align: center;
 }
 
 #playerBoard,
 #computerBoard {
-  width: 500px;
-  height: 500px;
+  width: 400px;
+  height: 400px;
   display: grid;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
   grid-template-columns: repeat(10, 1fr);
   box-sizing: border-box;
   border: 1px solid black;
@@ -81,8 +89,25 @@ div.computerBoard {
   margin-bottom: 50px;
 }
 
+#randomize,
 #play {
   padding: 20px;
-  width: 200px;
+  font-size: 20px;
+}
+
+#play {
   position: absolute;
+  width: 200px;
+  top: 40%;
+  left: calc(50% - 100px);
+}
+
+.inactive {
+  pointer-events: none;
+  background-color: #eeeeee;
+  opacity: 0.2;
+}
+
+.hide {
+  display: none;
 }

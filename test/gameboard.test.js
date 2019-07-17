@@ -1,4 +1,4 @@
-const gameboardFactory = require('../src/gameboard').default;
+import gameboardFactory from '../src/gameboard';
 
 test('board can place ships', () => {
   const gameboard = gameboardFactory();
@@ -34,6 +34,13 @@ test('board can receive attack on an empty cell', () => {
   const gameboard = gameboardFactory();
   expect(gameboard.receiveAttack(0, 0)).toEqual(false);
 });
+
+// test('receive attack calls ship.hit', () => {
+//   const gameboard = gameboardFactory();
+//   const ship = { hit: jest.fn() };
+//   gameboard.receiveAttack(0,0);
+//   expect(ship.hit).toBeCalled();
+// });
 
 test('all ships are sunk', () => {
   const gameboard = gameboardFactory();

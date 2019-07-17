@@ -69,7 +69,6 @@ const gameModule = (() => {
     const computerBoardDiv = document.getElementById('computerBoard');
     const playerBoard = gameboardFactory();
     const computerBoard = gameboardFactory();
-    console.log(computerBoard.matrix);
     const playerShips = playerBoard.initializeBoard();
     const computerShips = computerBoard.initializeBoard();
     const player = playerFactory(true, playerBoard, null);

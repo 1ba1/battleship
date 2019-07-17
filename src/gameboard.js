@@ -50,6 +50,7 @@ const gameboardFactory = () => {
     if (!validCoordinates(l, isHorizontal, coordinates)) return -1;
 
     const ship = shipFactory(l, isHorizontal);
+
     if (isHorizontal) {
       let row = coordinates[0];
       for (

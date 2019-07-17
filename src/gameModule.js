@@ -1,10 +1,56 @@
+import shipFactory from './ship';
 import playerFactory from './player';
 import gameboardFactory from './gameboard';
 import DOMModule from './DOMModule';
-import randomCoordinates from './utilities';
+import { randomBoolean, randomCoordinates } from './utilities';
 import './css/style.css';
 
 const gameModule = (() => {
+  const initializeBoard = (board) => {
+    let count1 = 0;
+    let count2 = 0;
+    let count3 = 0;
+    let count4 = 0;
+    let placedShips = [];
+
+    while (count1 < 4) {
+      const ship = shipFactory(1, true);
+      const placedShip = board.placeShip(ship, randomCoordinates());
+      if (placedShip !== -1) {
+        count1++;
+        placedShips.push(placedShip);
+      }
+    }
+
+    while (count2 < 3) {
+      const ship = shipFactory(2, randomBoolean());
+      const placedShip = board.placeShip(ship, randomCoordinates());
+      if (placedShip !== -1) {
+        count2++;
+        placedShips.push(placedShip);
+      }
+    }
+
+    while (count3 < 2) {
+      const ship = shipFactory(3, randomBoolean());
+      const placedShip = board.placeShip(ship, randomCoordinates());
+      if (placedShip !== -1) {
+        count3++;
+        placedShips.push(placedShip);
+      }
+    }
+
+    while (count4 < 1) {
+      const ship = shipFactory(4, randomBoolean());
+      const placedShip = board.placeShip(ship, randomCoordinates());
+      if (placedShip !== -1) {
+        count4++;
+        placedShips.push(placedShip);
+      }
+    }
+    return placedShips;
+  };
+
   const checkForWin = (player, computer) => {
     if (player.board.allSunk() || computer.board.allSunk()) {
       player.active = false;
@@ -69,8 +115,8 @@ const gameModule = (() => {
     const computerBoardDiv = document.getElementById('computerBoard');
     const playerBoard = gameboardFactory();
     const computerBoard = gameboardFactory();
-    const playerShips = playerBoard.initializeBoard();
-    const computerShips = computerBoard.initializeBoard();
+    const playerShips = initializeBoard(playerBoard);
+    const computerShips = initializeBoard(computerBoard);
     const player = playerFactory(true, playerBoard, null);
     const computer = playerFactory(false, computerBoard, []);
     DOMModule.displayBoard(playerBoardDiv, player.board.matrix);

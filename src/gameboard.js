@@ -46,16 +46,16 @@ const gameboardFactory = () => {
     return true;
   };
 
-  const placeShip = (l, isHorizontal, coordinates) => {
-    if (!validCoordinates(l, isHorizontal, coordinates)) return -1;
+  const placeShip = (ship, coordinates) => {
+    if (!validCoordinates(ship.length, ship.isHorizontal, coordinates)) {
+      return -1;
+    }
 
-    const ship = shipFactory(l, isHorizontal);
-
-    if (isHorizontal) {
+    if (ship.isHorizontal) {
       let row = coordinates[0];
       for (
         let i = coordinates[1], count = 0;
-        i < coordinates[1] + l;
+        i < coordinates[1] + ship.length;
         i++, count++
       ) {
         ship.cells[count] = [row, i];
@@ -65,7 +65,7 @@ const gameboardFactory = () => {
       let col = coordinates[1];
       for (
         let i = coordinates[0], count = 0;
-        i < coordinates[0] + l;
+        i < coordinates[0] + ship.length;
         i++, count++
       ) {
         ship.cells[count] = [i, col];
@@ -97,53 +97,11 @@ const gameboardFactory = () => {
     return true;
   };
 
-  const initializeBoard = () => {
-    let count1 = 0;
-    let count2 = 0;
-    let count3 = 0;
-    let count4 = 0;
-    let placedShips = [];
-
-    while (count1 < 4) {
-      const ship = placeShip(1, true, randomCoordinates());
-      if (ship !== -1) {
-        count1++;
-        placedShips.push(ship);
-      }
-    }
-
-    while (count2 < 3) {
-      const ship = placeShip(2, randomBoolean(), randomCoordinates());
-      if (ship !== -1) {
-        count2++;
-        placedShips.push(ship);
-      }
-    }
-
-    while (count3 < 2) {
-      const ship = placeShip(3, randomBoolean(), randomCoordinates());
-      if (ship !== -1) {
-        count3++;
-        placedShips.push(ship);
-      }
-    }
-
-    while (count4 < 1) {
-      const ship = placeShip(4, randomBoolean(), randomCoordinates());
-      if (ship !== -1) {
-        count4++;
-        placedShips.push(ship);
-      }
-    }
-    return placedShips;
-  };
-
   return {
     matrix,
     placeShip,
     receiveAttack,
     allSunk,
-    initializeBoard,
   };
 };
 

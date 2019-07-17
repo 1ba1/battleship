@@ -1,6 +1,3 @@
-import shipFactory from './ship';
-import { randomBoolean, randomCoordinates } from './utilities';
-
 const gameboardFactory = () => {
   let matrix = [];
   matrix.length = 10;
